@@ -1,7 +1,7 @@
 import {useEffect, useState} from "react"
 import {useAuthState} from "react-firebase-hooks/auth"
 import {Link, useNavigate} from "react-router-dom"
-import {auth, registerWithNameAndPassword} from "../../services/AuthServices"
+import {auth, registerWithEmailAndPassword} from "../../services/AuthServices"
 
 const Register =()=>{
     const[RegisterInfo,setRegisterInfo] = useState ({
@@ -23,12 +23,12 @@ const Register =()=>{
     const submitHandler  = (e)=>{
         e.preventDefault();
         console.log(RegisterInfo)
-        registerWithNameAndPassword(RegisterInfo.name, RegisterInfo.email, RegisterInfo.password)
+        registerWithEmailAndPassword(RegisterInfo.name, RegisterInfo.email, RegisterInfo.password)
     }
 
     useEffect(()=>{
         if(loading) return;
-        if(user) navigate('/works')
+        if(user) navigate("/")
     },[user,loading])
     return(
         <div className="container">

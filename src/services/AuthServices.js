@@ -6,9 +6,9 @@ const auth = firebase.default.auth();
 
 const db = app.firestore();
 
-const registerWithNameAndPassword = async (name, email, password) =>{
+const registerWithEmailAndPassword = async (name, email, password) =>{
     try{
-        const res = await auth.createUserWithNameAndPassword(name, password);
+        const res = await auth.createUserWithEmailAndPassword(email, password);
         const user = res.user;
         await db.collection('user').add({
             uid:user.uid,
@@ -21,9 +21,9 @@ const registerWithNameAndPassword = async (name, email, password) =>{
     }
 }
 
-const signInWithNameAndPassword = async(name, password)=>{
+const signInWithEmailAndPassword = async(email, password)=>{
     try{
-        await auth.signInWithNameAndPassword(name, password)
+        await auth.signInWithEmailAndPassword(email, password)
     }catch(err){
         console.log(err)
     }
@@ -34,6 +34,6 @@ export default firebase;
 export {
     auth,
     db,
-    registerWithNameAndPassword,
-    signInWithNameAndPassword
+    registerWithEmailAndPassword,
+    signInWithEmailAndPassword
 }

@@ -4,7 +4,7 @@ export const getUserData = (user,setUser)=>{
     try{
         firebase
         .firestore()
-        .collection('users')
+        .collection('user')
         .where("uid",'==',user?.uid)
         .get()
         .then(((userData)=>{setUser(userData.docs[0].data())}))

@@ -23,6 +23,7 @@ const User = ()=>{
 
       <Dropdown.Menu>
         <Dropdown.Item href="#/action-1">{userData.name}</Dropdown.Item>
+        <Dropdown.Item href="/holiday">Holiday pics</Dropdown.Item>
         <Dropdown.Item href="/">atsijungti</Dropdown.Item>
       </Dropdown.Menu>
     </Dropdown>
