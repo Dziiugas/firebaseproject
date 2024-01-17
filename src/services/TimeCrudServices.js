@@ -28,3 +28,20 @@ export const deletePhoto = (id)=>{
     .doc(id)
     .delete()
 }
+
+export const updatePhoto = (id,data)=>{
+    firebase
+        .firestore()
+        .collection("photos")
+        .doc(id)
+        .set(data);
+}
+
+export const showById = (photo, id)=>{
+    firebase
+    .firestore()
+    .collection('photos')
+    .doc(id)
+    .get()
+    .then((docRef)=>{photo(docRef.data())})
+}
