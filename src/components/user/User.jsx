@@ -11,7 +11,7 @@ const User = ()=>{
 
  useEffect(()=>{
     if(loading) return;
-    if (!user) navigate("/page");
+    if (!user) navigate("/");
     userServices.getUserData(user,setUserData)
  },[user,loading, userData])
 

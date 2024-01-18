@@ -1,47 +1,30 @@
 import firebase from '../firebase'
 
-export const addPhoto = (data)=>{
-    firebase
-    .firestore()
-    .collection('photos')
-    .add(data)
-}
-
-export const getAllPhotos = (onPhotosChanged)=>{
-    firebase
-    .firestore()
-    .collection('photos')
-    .onSnapshot((snapshot) => {
-        const newPhoto = snapshot.docs.map((doc) =>({
-            id: doc.id,
-            ...doc.data()
-        }))
-        onPhotosChanged(newPhoto)
-
-    })
-}
-
-export const deletePhoto = (id)=>{
-    firebase
-    .firestore()
-    .collection('photos')
-    .doc(id)
-    .delete()
-}
-
-export const updatePhoto = (id,data)=>{
-    firebase
+export const addPhoto = (data) => {
+    firebase.firestore().collection("photos").add(data);
+  };
+  
+  export const deletePhoto = async (id) => {
+    try {
+        await firebase.firestore().collection("photos").doc(id).delete();
+    } catch (error) {
+        console.error(error);
+    }
+  };
+  
+  export const getAllPhotos = async (user) => {
+    try {
+      if (!user || !user.uid) {
+        return [];
+      }
+      const snapshot = await firebase
         .firestore()
         .collection("photos")
-        .doc(id)
-        .set(data);
-}
-
-export const showById = (photo, id)=>{
-    firebase
-    .firestore()
-    .collection('photos')
-    .doc(id)
-    .get()
-    .then((docRef)=>{photo(docRef.data())})
-}
+        .where("uid", "==", user.uid)
+        .get();
+      const photos = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+      return photos;
+    } catch (error) {
+      console.error(error);
+    }
+  };
