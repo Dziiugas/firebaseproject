@@ -24,7 +24,7 @@ const submitHandler = (e)=>{
 
 useEffect(()=>{
     if (loading) return;
-    if(user) navigate("/page");
+    if(user) navigate('/page');
 }, [user,loading])
 return(
     <div className="container">

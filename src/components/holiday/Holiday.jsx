@@ -14,31 +14,23 @@ const Holiday = ()=>{
 
     const [user, loading] = useAuthState(auth);
   
-        const [photos, setPhotos] = useState ({
-            description:'',
-            url:'',
-            uid:''
-    })
+        const [photos, setPhotos] = useState ([])
 
    
     useEffect(() => {
-        const fetchPhotos = async () => {
             try {
                 if (user) {
-                    const fetchedPhotos = await service.getAllPhotos(photos);
+                   const fetchedPhotos =  service.getAllPhotos(user);
                     setPhotos(fetchedPhotos);
                 }
             } catch (error) {
                 console.error(error);
             }
-        };
-        if (!loading) {
-            fetchPhotos();
-        }
+      
+      
     }, [user, loading]);
 
-
-
+   console.log(photos)
 
         const handleChange = (e)=>{
             setPhotos({
